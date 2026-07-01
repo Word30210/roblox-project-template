@@ -1,0 +1,6 @@
+{
+    "languageMode": "strict",
+    "aliases": {
+        "shared": "roblox_packages/shared"
+    }
+}

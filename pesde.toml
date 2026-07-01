@@ -1,0 +1,7 @@
+name = "your_scope/root"
+version = "0.0.1"
+
+workspace_members = ["places/*", "packages/*"]
+
+[target]
+environment = "roblox"

@@ -1,0 +1,21 @@
+{
+    "name": "lobby",
+    "servePlaceIds": [134677332207638],
+    "tree": {
+        "$className": "DataModel",
+        "ReplicatedStorage": {
+            "shared": { "$path": "src/shared" },
+            "roblox_packages": { "$path": { "optional": "roblox_packages" } }
+        },
+        "ServerScriptService": { "$path": "src/server" },
+        "ServerStorage": {
+            "storage": { "$path": "src/storage" }
+        },
+        "StarterPlayer": {
+            "StarterPlayerScripts": {
+                "$path": "src/client"
+            }
+        },
+        "Workspace": { "$path": "src/workspace" }
+    }
+}

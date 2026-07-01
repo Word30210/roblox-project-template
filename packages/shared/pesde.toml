@@ -1,0 +1,10 @@
+name = "your_scope/shared"
+version = "0.0.1"
+
+[target]
+environment = "roblox"
+lib = "src/init.luau"
+
+[dependencies]
+
+[dev_dependencies]
