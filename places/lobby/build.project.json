@@ -1,19 +1,45 @@
 {
     "name": "lobby",
-    "servePlaceIds": [74810563590460],
+    "servePlaceIds": [
+        74810563590460
+    ],
     "tree": {
         "$className": "DataModel",
         "ReplicatedStorage": {
-            "shared": { "$path": { "optional": "dist/shared" } },
-            "roblox_packages": { "$path": { "optional": "dist/roblox_packages" } }
+            "shared": {
+                "$path": {
+                    "optional": "dist/shared"
+                }
+            },
+            "roblox_packages": {
+                "$path": {
+                    "optional": "dist/roblox_packages"
+                }
+            }
         },
-        "ServerScriptService": { "$path": { "optional": "dist/server" } },
+        "ServerScriptService": {
+            "$path": {
+                "optional": "dist/server"
+            }
+        },
         "ServerStorage": {
-            "storage": { "$path": { "optional": "dist/storage" } }
+            "storage": {
+                "$path": {
+                    "optional": "dist/storage"
+                }
+            }
         },
         "StarterPlayer": {
-            "StarterPlayerScripts": { "$path": { "optional": "dist/client" } }
+            "StarterPlayerScripts": {
+                "$path": {
+                    "optional": "dist/client"
+                }
+            }
         },
-        "Workspace": { "$path": { "optional": "dist/workspace" } }
+        "Workspace": {
+            "$path": {
+                "optional": "dist/workspace"
+            }
+        }
     }
 }

@@ -1,7 +1,7 @@
 const shared = require("@shared")
 
 const function greeting(name: string)
-    print(`Hello, { name }!`)
+    print(`Hello, {name}!`)
 end
 
 greeting("word")
