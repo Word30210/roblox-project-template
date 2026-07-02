@@ -49,6 +49,8 @@ cp .env.example .env
 
 - `mise`: 툴체인 매니저
 - `rojo`: 파일 시스템의 코드를 Roblox Studio와 동기화 해주는 툴
+- `stylua`: Lua 및 Luau를 대상으로 하는 코드 포메터
+- `selene`: Lua 및 Luau를 대상으로 하는 코드 린터
 - `pesde`: 패키지 매니저
 - `asphalt`: 비코드 에셋 관리
 - `lute`: Luau의 공식 독립 Luau 런타임
@@ -62,6 +64,9 @@ cp .env.example .env
 - `mise.toml`: 프로젝트에서 쓰일 툴들을 관리하는 파일입니다.
 - `asphalt.toml`: 비코드 에셋들을 관리해주는 툴인 `asphalt`의 설정 파일입니다.
 - `pesde.toml`: 최상위 디렉터리에서 플레이스 및 공통 모듈 모노 레포들을 설정하는 파일입니다.
+- `stylua.toml`: Luau 코드의 포메팅을 위한 설정 파일입니다.
+- `.styluaignore`: `.gitignore`와 비슷하게 동작합니다. 일부 파일이나 디렉터리를 `StyLua` 포메터가 포메팅 하지 않게 하기 위한 설정 파일입니다.
+- `selene.toml`: Luau 코드의 린팅을 위한 설정 파일입니다.
 - `Justfile`: 자주 쓰이는 명령어 그룹을 모아놓은 파일입니다.
 
 ### 플레이스 만들고 개발 환경 세팅하기
@@ -141,6 +146,4 @@ just install your-place-name
 
 아직 지원하지 않는 기능입니다.
 
-- CI/CD
-- StyLua를 사용한 코드 포매팅
-- selene를 사용한 코드 린팅
+- CI/CD(StyLua, Selene)
