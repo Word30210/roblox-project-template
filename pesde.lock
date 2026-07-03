@@ -8,8 +8,5 @@ target = "roblox"
 [workspace."your_scope/lobby"]
 roblox = "places/lobby"
 
-[workspace."your_scope/main"]
-roblox = "places/main"
-
 [workspace."your_scope/shared"]
 roblox = "packages/shared"
