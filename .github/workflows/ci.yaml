@@ -10,6 +10,27 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  quality-scripts:
+    name: Format & Lint (scripts/)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Setup mise
+        uses: jdx/mise-action@v2
+      
+      - name: Debug mise
+        run: |
+          mise ls
+          mise which stylua || echo "stylua not on path"
+          mise which selene || echo "selene not on path"
+      
+      - name: Check formatting (StyLua)
+        run: stylua --check scripts
+
+      - name: Lint (selene)
+        run: selene scripts --config scripts/selene.toml
+
   discover:
     name: Discover places
     runs-on: ubuntu-latest
@@ -25,7 +46,7 @@ jobs:
           echo "Discoverd: $places"
   
   quality:
-    name: Format & Lint (${{ matrix.place }})
+    name: Format & Lint (places/${{ matrix.place }})
     needs: discover
     runs-on: ubuntu-latest
     strategy:
@@ -50,6 +71,46 @@ jobs:
       - name: Lint (selene)
         run: selene places/${{ matrix.place }} --config places/${{ matrix.place }}/selene.toml
   
+  discover-packages:
+    name: Discover packages
+    runs-on: ubuntu-latest
+    outputs:
+      packages: ${{ steps.set.outputs.places }}
+    steps:
+      - uses: actions/checkout@v6
+      - id: set
+        name: Build packages matrix
+        run: |
+          packages=$(ls -d packages/*/ | xargs -n1 basename | jq -R -s -c 'split("\n") | map(select(length > 0))')
+          echo "packages=$packages" >> $GITHUB_OUTPUT
+          echo "Discoverd: $packages"
+  
+  quality-packages:
+    name: Format & Lint (packages/${{ matrix.package }})
+    needs: discover-packages
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        package: ${{ fromJson(needs.discover-packages.outputs.packages) }}
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Setup mise
+        uses: jdx/mise-action@v2
+      
+      - name: Debug mise
+        run: |
+          mise ls
+          mise which stylua || echo "stylua not on path"
+          mise which selene || echo "selene not on path"
+      
+      - name: Check formatting (StyLua)
+        run: stylua --check packages/${{ matrix.package }}
+
+      - name: Lint (selene)
+        run: selene packages/${{ matrix.package }} --config packages/${{ matrix.package }}/selene.toml
+
   build:
     name: Build (${{ matrix.place }})
     needs: [quality, discover]

@@ -1,4 +1,5 @@
 std = "luau"
+exclude = ["**/.pesde/*", "*_packages/*"]
 
 [lints]
 almost_swapped = "deny"
