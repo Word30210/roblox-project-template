@@ -4,6 +4,7 @@
         "JohnnyMorganz.stylua",
         "Kampfkarren.selene-vscode",
         "tamasfe.even-better-toml",
-        "skellock.just"
+        "skellock.just",
+        "github.vscode-github-actions"
     ]
 }
