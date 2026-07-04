@@ -87,7 +87,7 @@ jobs:
 
       - name: Build place file (Rojo)
         working-directory: places/${{ matrix.place }}
-        run: rojo build build.project.json -o ${{ matrix.place }}
+        run: rojo build build.project.json -o ${{ matrix.place }}.rbxl
 
       - name: Upload build artifact
         uses: actions/upload-artifact@v4
