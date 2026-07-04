@@ -4,6 +4,7 @@ set dotenv-load := true
 default:
     @just --list
 
+# asphalt commands
 assets:
     asphalt sync studio
 
@@ -16,6 +17,7 @@ assets-upload:
 assets-check:
     asphalt sync cloud --dry-run
 
+# place-related commands
 install place:
     cd places/{{place}}; pesde install
 
@@ -26,11 +28,21 @@ build place:
     cd places/{{place}}; rojo sourcemap default.project.json -o sourcemap.json; darklua process src dist; darklua process roblox_packages dist/roblox_packages
 
 dev place:
-    cd places/{{place}}; mprocs --names "rojo-sourcemap,darklua-src,darklua-pkg,rojo-serve" \
+    cd places/{{place}}; mprocs --names "rojo-sourcemap,darklua-process,rojo-serve" \
     "rojo sourcemap default.project.json -o sourcemap.json --watch" \
     "darklua process src dist --watch" \
-    "darklua process roblox_packages dist/roblox_packages --watch" \
     "rojo serve build.project.json"
 
 clean place:
     cd places/{{place}}; Remove-Item -Recurse -Force dist, sourcemap.json -ErrorAction SilentlyContinue
+
+# package-related commands
+install-pkg pkg:
+    cd packages/{{pkg}}; pesde install
+
+build-pkg pkg:
+    cd packages/{{pkg}}; darklua process src dist;
+
+# TODO: automatically run `pesde update` for places that use the changed package.
+dev pkg:
+    lute run scripts/pkg-change-watcher.luau

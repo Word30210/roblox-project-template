@@ -1,3 +1,3 @@
 return {
-    assets = require("@self/assets/assets"),
+	test_module = require("@test_module"),
 }
