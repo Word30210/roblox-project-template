@@ -1,0 +1,98 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency: 
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  discover:
+    name: Discover places
+    runs-on: ubuntu-latest
+    outputs:
+      places: ${{ steps.set.outputs.places }}
+    steps:
+      - uses: actions/checkout@v6
+      - id: set
+        name: Build places matrix
+        run: |
+          places=$(ls -d places/*/ | xargs -n1 basename | jq -R -s -c 'split("\n") | map(select(length > 0))')
+          echo "places=$places" >> $GITHUB_OUTPUT
+          echo "Discoverd: $places"
+  
+  quality:
+    name: Format & Lint (${{ matrix.place }})
+    needs: discover
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        place: ${{ fromJson(needs.discover.outputs.places) }}
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Setup mise
+        uses: jdx/mise-action@v2
+      
+      - name: Debug mise
+        run: |
+          mise ls
+          mise which stylua || echo "stylua not on path"
+          mise which selene || echo "selene not on path"
+      
+      - name: Check formatting (StyLua)
+        run: stylua --check places/${{ matrix.place }}
+
+      - name: Lint (selene)
+        run: selene places${{ matrix.place }}
+  
+  build:
+    name: Build (${{ matrix.place }})
+    needs: [quality, discover]
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        place: ${{ fromJson(needs.discover.outputs.places) }}
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Setup mise
+        uses: jdx/mise-action@v2
+
+      - name: Debug mise
+        run: |
+          mise ls
+          mise which pesde || echo "pesde not on path"
+          mise which rojo || echo "rojo not on path"
+          mise which darklua || echo "darklua not on path"
+
+      - name: Install dependencies (pesde)
+        working-directory: places/${{ matrix.place }}
+        run: pesde install
+
+      - name: Generate sourcemap (Rojo)
+        working-directory: places/${{ matrix.place }}
+        run: rojo sourcemap default.project.json -o sourcemap.json
+
+      - name: Process with darklua
+        working-directory: places/${{ matrix.place }}
+        run: |
+          darklua process src dist
+          darklua process roblox_packages dist/roblox_packages
+
+      - name: Build place file (Rojo)
+        working-directory: places/${{ matrix.place }}
+        run: rojo build build.project.json -o ${{ matrix.place }}
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: place-${{ matrix.place }}
+          path: places/${{ matrix.place }}/${{ matrix.place }}.rbxl
+          if-no-files-found: error
+          retention-days: 7        
