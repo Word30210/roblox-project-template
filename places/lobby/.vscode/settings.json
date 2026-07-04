@@ -4,6 +4,8 @@
     "luau-lsp.fflags.enableNewSolver": true,
     "luau-lsp.sourcemap.enabled": true,
     "luau-lsp.sourcemap.sourcemapFile": "sourcemap.json",
+    "editor.formatOnPaste": true,
+    "editor.formatOnSave": true,
     "[lua]": {
         "editor.defaultFormatter": "JohnnyMorganz.stylua"
     },
