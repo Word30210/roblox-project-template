@@ -1,3 +1,3 @@
 return {
-	test_module = require("@test_module"),
+    test_module = require("@test_module"),
 }
