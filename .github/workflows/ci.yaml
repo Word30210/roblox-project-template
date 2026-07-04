@@ -48,7 +48,7 @@ jobs:
         run: stylua --check places/${{ matrix.place }}
 
       - name: Lint (selene)
-        run: selene places/${{ matrix.place }}
+        run: selene places/${{ matrix.place }} --config places/${{ matrix.place }}/selene.toml
   
   build:
     name: Build (${{ matrix.place }})
