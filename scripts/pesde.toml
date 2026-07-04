@@ -1,0 +1,13 @@
+name = "your_scope/scripts"
+version = "0.0.1"
+
+[target]
+environment = "luau"
+
+[indices]
+default = "https://github.com/pesde-pkg/index"
+
+[dev_dependencies]
+
+[dependencies]
+tint = { name = "omarcoaraujo/tint", version = "^0.1.1" }
