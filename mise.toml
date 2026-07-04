@@ -1,6 +1,6 @@
 [tools]
-"github:JohnnyMorganz/StyLua" = "latest"
-"github:Kampfkarren/selene" = "latest"
+"aqua:JohnnyMorganz/StyLua" = "latest"
+"aqua:Kampfkarren/selene" = "latest"
 "github:jackTabsCode/asphalt" = "latest"
 "github:luau-lang/lute" = "latest"
 "github:pesde-pkg/pesde" = "latest"
