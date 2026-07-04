@@ -75,7 +75,7 @@ jobs:
     name: Discover packages
     runs-on: ubuntu-latest
     outputs:
-      packages: ${{ steps.set.outputs.places }}
+      packages: ${{ steps.set.outputs.packages }}
     steps:
       - uses: actions/checkout@v6
       - id: set
