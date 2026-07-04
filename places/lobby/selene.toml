@@ -1,6 +1,5 @@
-
 std = "roblox"
-exclude = ["**/dist/", "packages/shared/src/assets"]
+exclude = ["**/dist/"]
 
 [lints]
 almost_swapped = "deny"
