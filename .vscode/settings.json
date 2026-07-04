@@ -1,4 +1,14 @@
 {
     "editor.formatOnPaste": true,
     "editor.formatOnSave": true,
+    "[github-actions-workflow]": {
+        "editor.insertSpaces": true,
+        "editor.tabSize": 2,
+        "editor.autoIndent": "advanced",
+        "diffEditor.ignoreTrimWhitespace": false,
+        "editor.defaultColorDecorators": "never",
+        "editor.quickSuggestions": {
+            "strings": "on"
+        }
+    }
 }
