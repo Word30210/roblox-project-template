@@ -4,6 +4,12 @@ set dotenv-load := true
 default:
     @just --list
 
+init:
+    echo "installing scripts' packages first..."; cd scripts; pesde install; echo "running scripts/init-all.luau"; cd ..; lute run scripts/src/init-all.luau
+
+clean-all:
+    echo "cleaning all pesde/dist files..."; lute run scripts/src/clean-all.luau
+
 # asphalt commands
 assets:
     asphalt sync studio
@@ -44,5 +50,5 @@ build-pkg pkg:
     cd packages/{{pkg}}; darklua process src dist;
 
 # TODO: automatically run `pesde update` for places that use the changed package.
-dev pkg:
+dev-pkg pkg:
     lute run scripts/pkg-change-watcher.luau
