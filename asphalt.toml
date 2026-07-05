@@ -10,4 +10,4 @@ content = false
 
 [inputs.assets]
 path = "assets/**/*"
-output_path = "packages/shared/src/assets"
+output_path = "packages/assets/src"

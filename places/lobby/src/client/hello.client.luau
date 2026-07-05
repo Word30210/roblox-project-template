@@ -1,7 +1,6 @@
 const Players = game:GetService("Players")
 
-const shared = require("@shared")
-const assets = shared.assets
+const assets = require("@pkgs/assets")
 
 const localPlayer = Players.LocalPlayer
 const playerGui = localPlayer.PlayerGui

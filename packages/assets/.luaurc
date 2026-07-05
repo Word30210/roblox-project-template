@@ -1,6 +1,6 @@
 {
     "languageMode": "strict",
     "aliases": {
-        "pkgs": "roblox_packages"
+        "test_module": "src/test"
     }
 }
