@@ -6,5 +6,6 @@ environment = "roblox"
 
 [dependencies]
 shared = { workspace = "your_scope/shared", version = "^" }
+assets = { workspace = "your_scope/assets", version = "^" }
 
 [dev_dependencies]

@@ -6,11 +6,6 @@
     "tree": {
         "$className": "DataModel",
         "ReplicatedStorage": {
-            "shared": {
-                "$path": {
-                    "optional": "src/shared"
-                }
-            },
             "roblox_packages": {
                 "$path": {
                     "optional": "roblox_packages"

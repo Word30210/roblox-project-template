@@ -5,6 +5,13 @@ name = "your_scope/lobby"
 version = "0.1.0"
 target = "roblox"
 
+[graph."your_scope/assets@0.0.1 roblox"]
+direct = ["assets", { workspace = "your_scope/assets", version = "^" }, "standard"]
+
+[graph."your_scope/assets@0.0.1 roblox".pkg_ref]
+ref_ty = "workspace"
+path = "packages/assets"
+
 [graph."your_scope/shared@0.0.1 roblox"]
 direct = ["shared", { workspace = "your_scope/shared", version = "^" }, "standard"]
 

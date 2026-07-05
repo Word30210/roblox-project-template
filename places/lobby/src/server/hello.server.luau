@@ -1,4 +1,4 @@
-const shared = require("@shared")
+const shared = require("@pkgs/shared")
 
 const function greeting(name: string)
     print(`Hello, {name}!`)
