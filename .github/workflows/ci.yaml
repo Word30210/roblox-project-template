@@ -43,7 +43,7 @@ jobs:
         run: |
           places=$(ls -d places/*/ | xargs -n1 basename | jq -R -s -c 'split("\n") | map(select(length > 0))')
           echo "places=$places" >> $GITHUB_OUTPUT
-          echo "Discoverd: $places"
+          echo "Discovered: $places"
   
   quality:
     name: Format & Lint (places/${{ matrix.place }})
@@ -83,7 +83,7 @@ jobs:
         run: |
           packages=$(ls -d packages/*/ | xargs -n1 basename | jq -R -s -c 'split("\n") | map(select(length > 0))')
           echo "packages=$packages" >> $GITHUB_OUTPUT
-          echo "Discoverd: $packages"
+          echo "Discovered: $packages"
   
   quality-packages:
     name: Format & Lint (packages/${{ matrix.package }})
@@ -113,7 +113,7 @@ jobs:
 
   build:
     name: Build (${{ matrix.place }})
-    needs: [quality, discover]
+    needs: [quality, discover, quality-packages, discover-packages]
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -132,25 +132,32 @@ jobs:
           mise which rojo || echo "rojo not on path"
           mise which darklua || echo "darklua not on path"
 
-      - name: Install dependencies (pesde)
+      - name: Install dependencies and process with darklua all packages (pesde, darklua)
+        run: |
+          for package in packages/*/; do
+            echo "::group::$package"
+            (cd "$package" && pesde install && darklua process src dist)
+            echo "::endgroup"
+          done
+
+      - name: Install dependencies for places/${{ matrix.place }} (pesde)
         working-directory: places/${{ matrix.place }}
         run: pesde install
 
-      - name: Generate sourcemap (Rojo)
+      - name: Generate sourcemap for places/${{ matrix.place }} (Rojo)
         working-directory: places/${{ matrix.place }}
         run: rojo sourcemap default.project.json -o sourcemap.json
 
-      - name: Process with darklua
+      - name: Process with darklua for places/${{ matrix.place }}
         working-directory: places/${{ matrix.place }}
         run: |
           darklua process src dist
-          darklua process roblox_packages dist/roblox_packages
 
-      - name: Build place file (Rojo)
+      - name: Build place file for places/${{ matrix.place }} (Rojo)
         working-directory: places/${{ matrix.place }}
         run: rojo build build.project.json -o ${{ matrix.place }}.rbxl
 
-      - name: Upload build artifact
+      - name: Upload build artifact (places/${{ matrix.place }})
         uses: actions/upload-artifact@v4
         with:
           name: place-${{ matrix.place }}
