@@ -3,6 +3,18 @@
 
 여러 개의 플레이스를 활용하는 Roblox 프로젝트를 위한, 제 주관이 담긴 템플렛입니다.
 
+> [!IMPORTANT]
+> 이 저장소는 더 이상 관리되지 않으며, 공개 아카이브로 전환되었습니다.
+> 대신 [roblox-project-example](https://github.com/Word30210/roblox-project-example) 저장소를 참고하세요.
+>
+> This repository is no longer maintained and has been archived.
+> See [roblox-project-example](https://github.com/Word30210/roblox-project-example) instead.
+
+> [!CAUTION]
+> 이 문서는 업데이트 되지 않았습니다!
+> 
+> This document is outdated!
+
 ## 빠른 시작
 
 mise가 설치되어 있어야 합니다.
